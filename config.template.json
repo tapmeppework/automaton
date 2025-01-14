@@ -1,5 +1,6 @@
 {
 	"debug": true,
+	"profile": "extension",
 	"logs": 30,
 	"lock": true
 }

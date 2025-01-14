@@ -47,7 +47,7 @@ final class PipelineRunner extends Pipeline
 				$logs[] = compact('class', 'start', 'end') + ['steps' => $logs1];
 				$output[] = compact('class', 'start', 'end') + ['steps' => $output1];
 
-				Logger::success($success = "$class - completed");
+				Logger::success($success = "$class # SUCCESS");
 				Logger::write($success);
 			}
 		} catch (ServiceException $exception) {

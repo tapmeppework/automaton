@@ -5,18 +5,15 @@ namespace tapmeppe\automaton;
 require __DIR__ . '/vendor/autoload.php';
 
 use tapmeppe\automaton\blueprint\{Logger, PipelineRunner, Resources, Utils};
-use tapmeppe\automaton\extension\Admin;
+use tapmeppe\automaton\marketplace\Admin;
 
 /**
  * This block is used to declare the global variables.
  */
 define('TAPMEPPE_UMBRELLA', 'tapmeppe');
+// ...
 define('TAPMEPPE_NAMESPACE', __NAMESPACE__ . '\\');
 define('TAPMEPPE_ROOT', Resources::path(__DIR__));
-define('TAPMEPPE_STORIES', Resources::dir(TAPMEPPE_ROOT . '/stories'));
-define('TAPMEPPE_LOCK', TAPMEPPE_STORIES . '/lock.md');
-define('TAPMEPPE_LOGS', Resources::dir(TAPMEPPE_STORIES . '/logs'));
-
 // Load the configuration & arguments
 $_REQUEST = (array) Resources::readJSON(TAPMEPPE_ROOT . '/config.json');
 array_shift($argv); // Remove the script name from the arguments.
@@ -27,6 +24,12 @@ foreach ($argv as $i => $argument) { // Parse the arguments and overwrite the co
 	if (isset($argument[1])) $_REQUEST[$argument[0]] = $argument[1]; //$key1=$value1 $key2=$value2
 	else $_REQUEST[$i] = $argument[0]; //$value1 $value2
 }
+// ...
+define('TAPMEPPE_PROFILE', Utils::config('profile', 'extension')); //profile =~ extension folder
+define('TAPMEPPE_STORIES', Resources::dir(TAPMEPPE_ROOT . '/stories/' . TAPMEPPE_PROFILE));
+define('TAPMEPPE_LOCK', TAPMEPPE_STORIES . '/lock.md');
+define('TAPMEPPE_LOGS', Resources::dir(TAPMEPPE_STORIES . '/logs'));
+
 
 try {
 	Logger::start();
@@ -56,7 +59,7 @@ try {
 	$admin = 'Admin.php';
 	try {
 		// '@' is used to suppress the warning message, if the file is not found.
-		@require_once(TAPMEPPE_ROOT . "/src/extension/$admin");
+		@require_once(TAPMEPPE_ROOT . '/src/' . TAPMEPPE_PROFILE . "/$admin");
 	} catch (\Throwable $_) {
 		try {
 			require_once TAPMEPPE_ROOT . "/src/template/$admin";

@@ -1,6 +1,6 @@
 <?php
 
-namespace tapmeppe\automaton\extension;
+namespace tapmeppe\automaton\marketplace;
 
 /**
  * This is a sample script that demonstrates the usage of the pipeline.

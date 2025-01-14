@@ -1,7 +1,7 @@
 {
 	"name": "tapmeppe/automaton",
 	"description": "This is a composer package for the tapmeppe/automaton cli tool.",
-	"version": "0.1.0",
+	"version": "1.0.1",
 	"type": "project",
 	"homepage": "https://tapmeppe.work",
 	"authors": [
@@ -24,7 +24,8 @@
 			"tapmeppe\\automaton\\": "src/"
 		},
 		"exclude-from-classmap": [
-			"src/{extension,template}/Admin.php"
+			"src/*/Admin.php",
+			"!src/blueprint/Admin.php"
 		]
 	},
 	"require": {
