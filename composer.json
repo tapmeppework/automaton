@@ -1,0 +1,33 @@
+{
+	"name": "tapmeppe/automaton",
+	"description": "This is a composer package for the tapmeppe/automaton cli tool.",
+	"version": "0.1.0",
+	"type": "project",
+	"homepage": "https://tapmeppe.work",
+	"authors": [
+		{
+			"name": "Patrick Meppe",
+			"email": "patrick.meppe@tapmeppe.work",
+			"role": "Founder & Developer"
+		}
+	],
+	"keywords": [
+		"tapmeppe",
+		"composer",
+		"cli",
+		"console",
+		"automation",
+		"ci-cd"
+	],
+	"autoload": {
+		"psr-4": {
+			"tapmeppe\\automaton\\": "src/"
+		},
+		"exclude-from-classmap": [
+			"src/{extension,template}/Admin.php"
+		]
+	},
+	"require": {
+		"php": ">=8.2"
+	}
+}
