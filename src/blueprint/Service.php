@@ -7,13 +7,13 @@ namespace tapmeppe\automaton\blueprint;
  */
 abstract class Service
 {
-	// !abstract
+	// #abstract
 	abstract function process(array $data): array;
 
 
 	private array $logs = [];
 	private array $output = [];
-	
+
 	/**
 	 * This function is used to get all steps.
 	 */
@@ -29,19 +29,20 @@ abstract class Service
 	 */
 	protected function abort(string $reason = ''): array
 	{
-		throw new ServiceException($this->steps(), __CLASS__, $reason); // __CLASS__ =~ get_class($this)
+		$this->step('abort', compact('reason'));
+		throw new ServiceException($this->steps(), get_class($this), $reason); // __CLASS__ != get_class($this)
 		return []; // This is just to avoid the warnings.
 	}
 
 	/**
 	 * This function is used to log a service step. This log will be useful to debug the process.
 	 * @param string $name The name of the step.
-	 * @param array $info The additional information to log.
+	 * @param mixed $info The additional information to log.
 	 * @param bool $detailed If TRUE, the step will be outputted in a detailed way.
 	 */
-	protected final function step(string $name, array $info = [], bool $detailed = false): void
+	protected final function step(string $name, mixed $info = [], bool $detailed = false): void
 	{
-		Logger::warning($temp = Logger::declass(__CLASS__) . " - $name");
+		Logger::warning($temp = Logger::declass(get_class($this)) . " - $name");
 		Logger::write($temp);
 		// ...
 		$this->logs[] = $temp = compact('name', 'info');

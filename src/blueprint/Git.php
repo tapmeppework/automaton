@@ -23,7 +23,7 @@ class Git extends Director
 	 */
 	function add(array $options = [])
 	{
-		return $this->execute(array_merge(['add'], $options));
+		return $this->process(array_merge(['add'], $options));
 	}
 	function addAll(array $options = [])
 	{
@@ -37,7 +37,7 @@ class Git extends Director
 	 */
 	function branch(array $options = [])
 	{
-		return $this->execute(array_merge(['branch'], $options));
+		return $this->process(array_merge(['branch'], $options));
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Git extends Director
 	 */
 	function clone(array $options = [])
 	{
-		return $this->execute(array_merge(['clone'], $options, ['.']));
+		return $this->process(array_merge(['clone'], $options, ['.']));
 	}
 
 	/**
@@ -56,7 +56,7 @@ class Git extends Director
 	 */
 	function commit(array $options = [])
 	{
-		return $this->execute(array_merge(['commit'], $options));
+		return $this->process(array_merge(['commit'], $options));
 	}
 	function commitMsg(string $message, array $options = [])
 	{
@@ -72,9 +72,9 @@ class Git extends Director
 	 */
 	function hash(): string|NULL
 	{
-		list($success, $output) = $this->execute(['rev-parse HEAD']);
-		// list($success, $output) = $this->execute(['log --pretty=format:"%H" -n 1']);
-		// list($success, $output) = $this->execute(['log --pretty=format:"%H" -1']);
+		list($success, $output) = $this->process(['rev-parse HEAD']);
+		// list($success, $output) = $this->process(['log --pretty=format:"%H" -n 1']);
+		// list($success, $output) = $this->process(['log --pretty=format:"%H" -1']);
 		return $success ? $output[0] : NULL;
 	}
 
@@ -95,7 +95,7 @@ class Git extends Director
 	 */
 	function log(array $options = [])
 	{
-		return $this->execute(array_merge(['log'], $options));
+		return $this->process(array_merge(['log'], $options));
 	}
 
 	/**
@@ -104,7 +104,7 @@ class Git extends Director
 	 */
 	function pull(array $options = [])
 	{
-		return $this->execute(array_merge(['pull'], $options));
+		return $this->process(array_merge(['pull'], $options));
 	}
 
 	/**
@@ -113,7 +113,7 @@ class Git extends Director
 	 */
 	function push(array $options = [])
 	{
-		return $this->execute(array_merge(['push'], $options));
+		return $this->process(array_merge(['push'], $options));
 	}
 
 	function repository(): string
@@ -127,6 +127,6 @@ class Git extends Director
 	 */
 	function status(array $options = [])
 	{
-		return $this->execute(array_merge(['status'], $options));
+		return $this->process(array_merge(['status'], $options));
 	}
 }

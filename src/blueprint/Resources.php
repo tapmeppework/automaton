@@ -13,16 +13,17 @@ final class Resources
 	 * @param string $target The target directory or file.
 	 * @return bool True if the resource was copied, false otherwise.
 	 */
-	static function copy(string $source, string $target): bool {
+	static function copy(string $source, string $target): bool
+	{
 		if (!is_dir($source)) return copy($source, $target);
-		
+
 		self::dir($target);
 		foreach (scandir($source) as $resource) {
 			if (
-				$resource == '.' || $resource == '..' || 
+				$resource == '.' || $resource == '..' ||
 				self::copy("$source/$resource", "$target/$resource")
 			) continue;
-			
+
 			return false; //stop as soon as a copy fails
 		}
 		return true;
@@ -56,13 +57,15 @@ final class Resources
 	/**
 	 * #alias
 	 */
-	static function exists(string $resource): bool {
+	static function exists(string $resource): bool
+	{
 		return file_exists($resource);
 		// return is_dir($resource) || is_file($resource);
 	}
 
-	static function files(string $directory, ...$flags): array {
-		return array_diff(scandir($directory), ['.', '..', ...$flags]);
+	static function files(string $directory, ...$flags): array
+	{
+		return array_diff(scandir($directory), array_merge(['.', '..'], $flags));
 	}
 
 	static function path(string $path): string
@@ -98,10 +101,9 @@ final class Resources
 	{
 		try {
 			if ($object = json_decode(self::read($file))) return $object;
-		} catch (\Throwable $th) {
-		}
-
-		return (object)$fallback;
+		} catch (\Throwable $th) {}
+		// DO NOT MERGE
+		return (object) $fallback;
 	}
 
 	/**
@@ -111,8 +113,13 @@ final class Resources
 	 * @param int $flags The flags to use.
 	 * @return bool True if the file was written, false otherwise.
 	 */
-	static function write(string $file, string $content, int $flags = 0): bool {
+	static function write(string $file, string $content, int $flags = 0): bool
+	{
 		return file_put_contents($file, $content, $flags) !== false;
+	}
+	static function writeJSON(string $file, mixed $content): bool
+	{
+		return self::write($file, json_encode($content));
 	}
 
 	// !private

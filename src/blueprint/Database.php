@@ -14,8 +14,8 @@ class Database
 	) {
 		$this->server = new \mysqli($host, $user, $password, $name);
 		if ($this->server->connect_errno) Utils::shutdown(
-			"The connection to the database has failed!\n%s",
-			$this->server->connect_error
+			"The connection to the database has failed!\n" . $this->server->connect_error,
+			$this->server->connect_errno
 		);
 	}
 

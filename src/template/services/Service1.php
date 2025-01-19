@@ -12,6 +12,7 @@ class Service1 extends Service
 	function process(array $data): array
 	{
 		// Example processing: Add a key to the data
+		$this->step('step1');
 		$data['step1'] = 'Processed by Step 1';
 		return $data;
 	}

@@ -25,8 +25,8 @@ foreach ($argv as $i => $argument) { // Parse the arguments and overwrite the co
 	else $_REQUEST[$i] = $argument[0]; //$value1 $value2
 }
 // ...
-define('TAPMEPPE_PROFILE', Utils::config('profile', 'extension')); //profile =~ extension folder
-define('TAPMEPPE_STORIES', Resources::dir(TAPMEPPE_ROOT . '/stories/' . TAPMEPPE_PROFILE));
+define('TAPMEPPE_PROJECT', Utils::config('project', 'extension')); //project =~ extension folder
+define('TAPMEPPE_STORIES', Resources::dir(TAPMEPPE_ROOT . '/stories/' . TAPMEPPE_PROJECT));
 define('TAPMEPPE_LOCK', TAPMEPPE_STORIES . '/lock.md');
 define('TAPMEPPE_LOGS', Resources::dir(TAPMEPPE_STORIES . '/logs'));
 
@@ -59,7 +59,7 @@ try {
 	$admin = 'Admin.php';
 	try {
 		// '@' is used to suppress the warning message, if the file is not found.
-		@require_once(TAPMEPPE_ROOT . '/src/' . TAPMEPPE_PROFILE . "/$admin");
+		@require_once(TAPMEPPE_ROOT . '/src/' . TAPMEPPE_PROJECT . "/$admin");
 	} catch (\Throwable $_) {
 		try {
 			require_once TAPMEPPE_ROOT . "/src/template/$admin";

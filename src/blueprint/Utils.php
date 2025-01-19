@@ -62,6 +62,30 @@ class Utils
 		return [$result == 0, $output, $result];
 	}
 
+	static final function isLinux(): bool
+	{
+		return str_contains(strtolower(PHP_OS), 'linux');
+	}
+
+	static final function isWin(): bool
+	{
+		return str_contains(strtolower(PHP_OS), 'win');
+	}
+
+	static final function variables(array $variables): string
+	{
+		$result = '';
+
+		if (self::isWin()) foreach ($variables as $key => $value) {
+			$result .= "set \"$key=$value\" && ";
+		}
+		elseif (self::isLinux()) foreach ($variables as $key => $value) {
+			$result .= "$key=$value ";
+		}
+
+		return $result;
+	}
+
 	/**
 	 * This function is used to forcefully stop the execution of the process.
 	 */

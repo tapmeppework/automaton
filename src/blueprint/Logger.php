@@ -91,7 +91,7 @@ final class Logger
 				'',
 				'',
 				' ',
-				"\n",
+				PHP_EOL,
 			],
 			self::declass(print_r($object, true))
 		));

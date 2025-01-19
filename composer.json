@@ -1,7 +1,7 @@
 {
 	"name": "tapmeppe/automaton",
 	"description": "This is a composer package for the tapmeppe/automaton cli tool.",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"type": "project",
 	"homepage": "https://tapmeppe.work",
 	"authors": [
